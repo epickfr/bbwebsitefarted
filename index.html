@@ -6,7 +6,7 @@
     <title>Bart Blast Community • Discord</title>
 
     <meta property="og:title" content="Bart Blast Community" />
-    <meta property="og:description" content="Join our awesome community! Hang out." />
+    <meta property="og:description" content="Join the bart." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://bb.bart.cx" />
     <meta property="og:image" content="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" />
@@ -27,50 +27,54 @@
         .card {
             background: #2f3136;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             overflow: hidden;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
         }
         .banner {
-            height: 120px;
-            background: linear-gradient(90deg, #5865F2, #7289da);
+            height: 140px;
+            background: linear-gradient(135deg, #5865F2, #7289da, #4752c4);
             position: relative;
         }
         .server-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             background: #202225;
-            border-radius: 20px;
-            border: 6px solid #2f3136;
+            border-radius: 25px;
+            border: 8px solid #2f3136;
             position: absolute;
-            bottom: -40px;
-            left: 20px;
+            bottom: -45px;
+            left: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6);
         }
         .btn-join {
             background: #5865F2;
             color: white;
             font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 4px;
-            transition: background 0.2s;
+            padding: 14px 32px;
+            border-radius: 6px;
+            transition: all 0.2s;
             text-decoration: none;
             display: block;
             text-align: center;
+            font-size: 1.125rem;
         }
         .btn-join:hover {
             background: #4752c4;
+            transform: translateY(-1px);
         }
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             display: inline-block;
-            margin-right: 6px;
+            margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
         }
-        .loading { opacity: 0.6; }
+        .loading { opacity: 0.7; filter: blur(0.5px); transition: all 0.4s; }
+        .error-text { color: #f04747; font-size: 0.875rem; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
@@ -78,38 +82,40 @@
     <div class="card">
         <div class="banner">
             <div class="server-icon">
-                <img src="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" alt="Bart Blast Server Icon" class="w-full h-full object-cover">
+                <img src="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" alt="Bart Blast Icon" class="w-full h-full object-cover">
             </div>
         </div>
 
-        <div class="p-8 pt-14">
-            <h1 class="text-3xl font-bold text-white mb-2">
-                Bart Blast Community
+        <div class="p-10 pt-16">
+            <h1 class="text-4xl font-extrabold text-white mb-3 tracking-tight">
+                Bart Blast!
             </h1>
 
-            <p class="text-[#b9bbbe] mb-6">
-                Connect with our special community
+            <p class="text-[#b9bbbe] mb-8 text-base leading-relaxed">
+                
             </p>
 
-            <div class="flex items-center gap-6 mb-8 text-sm loading" id="member-stats">
-                <div>
+            <div class="flex flex-wrap items-center gap-8 mb-10 text-base" id="member-stats">
+                <div class="flex items-center">
                     <span class="status-dot bg-[#3ba55c]"></span>
-                    <span class="discord-green font-semibold" id="online-count">Loading...</span> Online
+                    <span class="discord-green font-bold" id="online-count">Loading...</span>
+                    <span class="ml-2 text-[#b9bbbe]">Online</span>
                 </div>
-                <div>
+                <div class="flex items-center">
                     <span class="status-dot bg-[#b9bbbe]"></span>
-                    <span class="text-[#b9bbbe] font-semibold" id="total-count">Loading...</span> Members
+                    <span class="font-bold text-[#b9bbbe]" id="total-count">—</span>
+                    <span class="ml-2 text-[#b9bbbe]">Members</span>
                 </div>
             </div>
 
             <a href="https://discord.gg/ZNSWK5vgQa"
                target="_blank"
-               class="btn-join text-lg">
-                Join Server
+               class="btn-join">
+                Join the Blast
             </a>
 
-            <p class="text-center text-xs text-[#72767d] mt-6">
-                You need a Discord account to join
+            <p class="text-center text-xs text-[#72767d] mt-8">
+                Discord account required
             </p>
         </div>
     </div>
@@ -128,7 +134,7 @@
 
             try {
                 const response = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
                 const data = await response.json();
 
@@ -136,24 +142,26 @@
                 const total = data.member_count || 0;
 
                 onlineEl.textContent = online.toLocaleString();
-                totalEl.textContent  = total.toLocaleString();
+
+                if (total > 0) {
+                    totalEl.textContent = total.toLocaleString();
+                } else {
+                    totalEl.textContent = "Small but chaotic";
+                    totalEl.classList.add("italic");
+                }
 
                 statsEl.classList.remove("loading");
             } catch (err) {
-                console.error("Discord widget fetch failed:", err);
-                onlineEl.textContent = "—";
-                totalEl.textContent  = "—";
+                console.warn("Widget fetch issue:", err);
+                onlineEl.textContent = "13-ish";
+                totalEl.textContent = "Growing fast";
+                totalEl.classList.add("error-text");
                 statsEl.classList.remove("loading");
             }
         }
 
-        if (SERVER_ID !== "0") {
-            updateMemberCounts();
-            setInterval(updateMemberCounts, 90000);
-        } else {
-            document.getElementById("online-count").textContent = "balls";
-            document.getElementById("total-count").textContent  = "balls";
-        }
+        updateMemberCounts();
+        setInterval(updateMemberCounts, 120000);
     </script>
 
 </body>
