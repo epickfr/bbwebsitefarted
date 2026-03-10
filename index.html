@@ -3,83 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bart Blast Community | Join Discord</title>
+    <title>Bart Blast Community • Discord</title>
+
+    <meta property="og:title" content="Bart Blast Community" />
+    <meta property="og:description" content="Join our awesome community! to Hang out." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://bb.bart.cx" />
+    <meta property="og:image" content="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" /> 
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta name="theme-color" content="#5865F2" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        ::-webkit-scrollbar {
-            width: 12px;
+        body {
+            background: #36393f;
+            color: #dcddde;
+            font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
-        ::-webkit-scrollbar-track {
-            background: #0d1117;
+        .discord-blue {
+            color: #00aff4;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #30363d;
-            border-radius: 6px;
-            border: 2px solid #0d1117;
+        .discord-green {
+            color: #3ba55c;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #58a6ff;
+        .card {
+            background: #2f3136;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            overflow: hidden;
+            max-width: 480px;
+            width: 100%;
         }
-
-        html {
-            scroll-behavior: smooth;
+        .banner {
+            height: 120px;
+            background: linear-gradient(90deg, #5865F2, #7289da);
+            position: relative;
         }
-
-        .glass-panel {
-            background: rgba(22, 27, 34, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .server-icon {
+            width: 80px;
+            height: 80px;
+            background: #202225;
+            border-radius: 20px;
+            border: 6px solid #2f3136;
+            position: absolute;
+            bottom: -40px;
+            left: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        
-        .glow-blue {
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+        .btn-join {
+            background: #5865F2;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
-        
-        .glow-purple {
-            box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+        .btn-join:hover {
+            background: #4752c4;
         }
-
-        .transition-all-custom {
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
         }
     </style>
 </head>
-<body class="bg-[#010409] text-gray-200 font-sans selection:bg-[#58a6ff] selection:text-white">
+<body class="min-h-screen flex items-center justify-center p-6">
 
-    <div class="fixed inset-0 z-[-1] overflow-hidden">
-        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-blue-900/20 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-purple-900/20 rounded-full blur-[120px]"></div>
-    </div>
+    <div class="card">
 
-    <main class="min-h-screen flex flex-col items-center justify-center p-6">
-        <div class="glass-panel p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center transition-all-custom hover:scale-[1.02] hover:glow-blue">
-            <h1 class="text-5xl font-extrabold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Join Our Discord
-            </h1>
-            <p class="text-gray-400 mb-10 text-lg">
-                Connect with our special community...
-            </p>
-
-            <div class="flex flex-col gap-4">
-                <a href="https://discord.gg/ZNSWK5vgQa" target="_blank" 
-                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition-all-custom glow-purple hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(88,101,242,0.6)]">
-                    Join Discord Server
-                    <span class="ml-2 transition-transform duration-500 group-hover:translate-x-2">→</span>
-                </a>
+        <div class="banner">
+            <!-- You can replace this with a real banner image if you have one -->
+            <div class="server-icon">
+                <!-- Put your server icon here (ideally 512×512 rounded) -->
+                <img src="https://i.imgur.com/XXXXXXXX.png" alt="Server Icon" class="w-full h-full object-cover">
             </div>
         </div>
 
-        <footer class="mt-12 text-gray-600 text-sm">
-            Powered by my ass
-        </footer>
-    </main>
+        <div class="p-8 pt-14">
+            <h1 class="text-3xl font-bold text-white mb-2">
+                Bart Blast Community
+            </h1>
 
-    <script>
-        document.querySelectorAll('a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                console.log("Navigating to discord...");
-            });
-        });
-    </script>
+            <p class="text-[#b9bbbe] mb-6">
+                Connect with our special community • Memes, gaming, chill vibes and chaos
+            </p>
+
+            <div class="flex items-center gap-6 mb-8 text-sm">
+                <div>
+                    <span class="status-dot bg-[#3ba55c]"></span>
+                    <span class="discord-green font-semibold">Y Online</span>
+                </div>
+                <div>
+                    <span class="status-dot bg-[#b9bbbe]"></span>
+                    <span class="text-[#b9bbbe] font-semibold">X Members</span>
+                </div>
+            </div>
+
+            <a href="https://discord.gg/ZNSWK5vgQa"
+               target="_blank"
+               class="btn-join w-full block text-center text-lg">
+                Join Server
+            </a>
+
+            <p class="text-center text-xs text-[#72767d] mt-6">
+                You need a Discord account to join
+            </p>
+        </div>
+    </div>
+
+    <footer class="fixed bottom-4 text-xs text-gray-500">
+        Powered by my ass • discord.gg/ZNSWK5vgQa
+    </footer>
+
 </body>
 </html>
