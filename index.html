@@ -6,10 +6,10 @@
     <title>Bart Blast Community • Discord</title>
 
     <meta property="og:title" content="Bart Blast Community" />
-    <meta property="og:description" content="Join our awesome community! to Hang out." />
+    <meta property="og:description" content="Join our awesome community! Hang out." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://bb.bart.cx" />
-    <meta property="og:image" content="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" /> 
+    <meta property="og:image" content="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta name="theme-color" content="#5865F2" />
@@ -20,13 +20,10 @@
             background: #36393f;
             color: #dcddde;
             font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        .discord-blue {
-            color: #00aff4;
-        }
-        .discord-green {
-            color: #3ba55c;
-        }
+        .discord-green { color: #3ba55c; }
         .card {
             background: #2f3136;
             border-radius: 8px;
@@ -59,6 +56,9 @@
             padding: 12px 24px;
             border-radius: 4px;
             transition: background 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
         }
         .btn-join:hover {
             background: #4752c4;
@@ -70,17 +70,15 @@
             display: inline-block;
             margin-right: 6px;
         }
+        .loading { opacity: 0.6; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
 
     <div class="card">
-
         <div class="banner">
-            <!-- You can replace this with a real banner image if you have one -->
             <div class="server-icon">
-                <!-- Put your server icon here (ideally 512×512 rounded) -->
-                <img src="https://i.imgur.com/XXXXXXXX.png" alt="Server Icon" class="w-full h-full object-cover">
+                <img src="https://i.ibb.co/7d9SFQgt/Pi7-Gif-1.gif" alt="Bart Blast Server Icon" class="w-full h-full object-cover">
             </div>
         </div>
 
@@ -93,20 +91,20 @@
                 Connect with our special community • Memes, gaming, chill vibes and chaos
             </p>
 
-            <div class="flex items-center gap-6 mb-8 text-sm">
+            <div class="flex items-center gap-6 mb-8 text-sm loading" id="member-stats">
                 <div>
                     <span class="status-dot bg-[#3ba55c]"></span>
-                    <span class="discord-green font-semibold">Y Online</span>
+                    <span class="discord-green font-semibold" id="online-count">Loading...</span> Online
                 </div>
                 <div>
                     <span class="status-dot bg-[#b9bbbe]"></span>
-                    <span class="text-[#b9bbbe] font-semibold">X Members</span>
+                    <span class="text-[#b9bbbe] font-semibold" id="total-count">Loading...</span> Members
                 </div>
             </div>
 
             <a href="https://discord.gg/ZNSWK5vgQa"
                target="_blank"
-               class="btn-join w-full block text-center text-lg">
+               class="btn-join text-lg">
                 Join Server
             </a>
 
@@ -116,9 +114,47 @@
         </div>
     </div>
 
-    <footer class="fixed bottom-4 text-xs text-gray-500">
+    <footer class="fixed bottom-4 left-0 right-0 text-center text-xs text-gray-500">
         Powered by my ass • discord.gg/ZNSWK5vgQa
     </footer>
+
+    <script>
+        const SERVER_ID = "YOUR_SERVER_ID_HERE";
+
+        async function updateMemberCounts() {
+            const statsEl = document.getElementById("member-stats");
+            const onlineEl = document.getElementById("online-count");
+            const totalEl = document.getElementById("total-count");
+
+            try {
+                const response = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+
+                const data = await response.json();
+
+                const online = data.presence_count || 0;
+                const total = data.member_count || 0;
+
+                onlineEl.textContent = online.toLocaleString();
+                totalEl.textContent  = total.toLocaleString();
+
+                statsEl.classList.remove("loading");
+            } catch (err) {
+                console.error("Discord widget fetch failed:", err);
+                onlineEl.textContent = "—";
+                totalEl.textContent  = "—";
+                statsEl.classList.remove("loading");
+            }
+        }
+
+        if (SERVER_ID !== "1472087830091268298") {
+            updateMemberCounts();
+            setInterval(updateMemberCounts, 90000);
+        } else {
+            document.getElementById("online-count").textContent = "balls";
+            document.getElementById("total-count").textContent  = "balls";
+        }
+    </script>
 
 </body>
 </html>
